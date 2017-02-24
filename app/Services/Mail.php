@@ -10,6 +10,7 @@ use App\Services\Mail\File;
 use App\Services\Mail\Mailgun;
 use App\Services\Mail\Ses;
 use App\Services\Mail\Smtp;
+use App\Services\Mail\SendGrid;
 use Smarty;
 
 
@@ -30,6 +31,8 @@ class Mail
                 return new Smtp();
             case "file":
                 return new File();
+            case: 'sendgrid':
+                return new SendGrid();
             default:
                 // @TODO default action
         }
