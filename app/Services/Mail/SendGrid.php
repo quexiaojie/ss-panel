@@ -41,7 +41,7 @@ class SendGrid extends Base
             "from" => [ "email" => $this->sender ],
             "content" => [
                 [
-                    "type" => "text/plain",
+                    "type" => "text/html",
                     "value"=> $text
                 ]
             ]
