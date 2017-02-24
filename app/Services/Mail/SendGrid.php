@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Mail;
 use App\Services\Config;
-use SendGrid\Mail as Mail;
 use SendGrid as SendGridService;
 class SendGrid extends Base
 {
@@ -30,8 +29,23 @@ class SendGrid extends Base
      */
     public function send($to, $subject, $text, $file)
     {
-        $mail = new Mail($this->sender, $subject, $to, $text);
-        $mail->addAttachment($file);
-        $this->sg->client->mail()->send()->post($mail);
+        $request_body = [
+            "personalizations" => [
+             [
+                "to" => [
+                    ["email" => $to]
+                ],
+                "subject" => $subject
+            ]
+            ],
+            "from" => [ "email" => $this->sender ],
+            "content" => [
+                [
+                    "type" => "text/plain",
+                    "value"=> $text
+                ]
+            ]
+        ];
+        @$this->sg->client->mail()->send()->post($request_body);
     }
 }
