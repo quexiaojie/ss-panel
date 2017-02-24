@@ -12,7 +12,7 @@ class SendGrid extends Base
     public function __construct()
     {
         $this->config = $this->getConfig();
-        $this->sg = new SendGridService($this->config["grid_key"]);
+        $this->sg = new SendGridService($this->config["key"]);
         $this->sender = $this->config["sender"];
     }
     /**
